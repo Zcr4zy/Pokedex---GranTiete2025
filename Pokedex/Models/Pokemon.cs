@@ -44,5 +44,7 @@ namespace Pokedex.Models
         [StringLength(400)]
         public string Animacao { get; set; }
 
+        List<PokemonTipo> Tipos { get; set; }
+
     }
 }
