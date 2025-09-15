@@ -18,6 +18,12 @@ namespace Pokedex.Data
         public DbSet<Genero> Generos { get; set; }
         public DbSet<Regiao> Regioes { get; set; }
         public DbSet<Pokemon> Pokemons { get; set; }
-        public DbSet<PokemonTipo> PokemonTipos  { get; set;}
+        public DbSet<PokemonTipo> PokemonTipos { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<PokemonTipo>().HasKey(pt => new { pt.PokemonNumero, pt.TipoId });
+        }
     }
 }

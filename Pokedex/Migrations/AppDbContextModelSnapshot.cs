@@ -87,21 +87,16 @@ namespace Pokedex.Migrations
 
             modelBuilder.Entity("Pokedex.Models.PokemonTipo", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<int>("PokemonNumero")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("PokemonNumero");
+                    b.HasKey("PokemonNumero", "TipoId");
 
                     b.HasIndex("TipoId");
 

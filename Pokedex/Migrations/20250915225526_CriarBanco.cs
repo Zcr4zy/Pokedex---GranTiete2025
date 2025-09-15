@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Pokedex.Migrations
 {
     /// <inheritdoc />
-    public partial class CriacaoTabelas : Migration
+    public partial class CriarBanco : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -102,14 +102,13 @@ namespace Pokedex.Migrations
                 name: "PokemonTipo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     PokemonNumero = table.Column<int>(type: "int", nullable: false),
-                    TipoId = table.Column<int>(type: "int", nullable: false)
+                    TipoId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonTipo", x => x.Id);
+                    table.PrimaryKey("PK_PokemonTipo", x => new { x.PokemonNumero, x.TipoId });
                     table.ForeignKey(
                         name: "FK_PokemonTipo_Pokemon_PokemonNumero",
                         column: x => x.PokemonNumero,
@@ -134,11 +133,6 @@ namespace Pokedex.Migrations
                 name: "IX_Pokemon_RegiaoId",
                 table: "Pokemon",
                 column: "RegiaoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PokemonTipo_PokemonNumero",
-                table: "PokemonTipo",
-                column: "PokemonNumero");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PokemonTipo_TipoId",
