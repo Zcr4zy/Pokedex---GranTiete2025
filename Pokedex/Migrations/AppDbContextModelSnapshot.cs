@@ -93,9 +93,6 @@ namespace Pokedex.Migrations
                     b.Property<int>("TipoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.HasKey("PokemonNumero", "TipoId");
 
                     b.HasIndex("TipoId");
@@ -165,7 +162,7 @@ namespace Pokedex.Migrations
             modelBuilder.Entity("Pokedex.Models.PokemonTipo", b =>
                 {
                     b.HasOne("Pokedex.Models.Pokemon", "Pokemon")
-                        .WithMany()
+                        .WithMany("Tipos")
                         .HasForeignKey("PokemonNumero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -179,6 +176,11 @@ namespace Pokedex.Migrations
                     b.Navigation("Pokemon");
 
                     b.Navigation("Tipo");
+                });
+
+            modelBuilder.Entity("Pokedex.Models.Pokemon", b =>
+                {
+                    b.Navigation("Tipos");
                 });
 #pragma warning restore 612, 618
         }
